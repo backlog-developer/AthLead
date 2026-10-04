@@ -33,6 +33,6 @@ test("rejects passwords containing whitespace", () => {
   assert.equal(isValidPassword("Strong @123"), false);
 });
 
-test("rejects a valid substring inside an otherwise invalid password", () => {
-  assert.equal(PASSWORD_PATTERN.test("xxxStrong@123xxx"), false);
+test("rejects a valid password followed by invalid whitespace", () => {
+  assert.equal(PASSWORD_PATTERN.test("Strong@123 "), false);
 });

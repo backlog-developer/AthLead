@@ -1,5 +1,8 @@
 import * as z from "zod";
-import { PASSWORD_ERROR_MESSAGE, PASSWORD_PATTERN } from "./passwordValidation.js";
+import {
+  PASSWORD_ERROR_MESSAGE,
+  PASSWORD_PATTERN,
+} from "./passwordValidation.js";
 
 export const signupVal = z.object({
   email: z.string().email("Invalid email address"),

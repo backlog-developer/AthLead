@@ -8,6 +8,10 @@ import CalendarPicker from "../Components/CalendarPicker";
 import OtpVerification, {
   OTP_SESSION_KEY,
 } from "../Components/OtpVerification.jsx";
+import {
+  PASSWORD_ERROR_MESSAGE,
+  PASSWORD_PATTERN,
+} from "../utils/passwordValidation.js";
 
 // ── Step constants ────────────────────────────────────────────────────────────
 const STEP_FORM = "form";
@@ -289,8 +293,8 @@ const Signup = () => {
                     {...register("password", {
                       required: true,
                       pattern: {
-                        value: /[a-zA-z0-9_\-.@$]{7,16}/i,
-                        message: "Need 7-16 chars, special characters allowed",
+                        value: PASSWORD_PATTERN,
+                        message: PASSWORD_ERROR_MESSAGE,
                       },
                     })}
                     className="transparent w-full h-full focus:outline-none focus:ring-0"

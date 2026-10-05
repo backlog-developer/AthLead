@@ -14,7 +14,7 @@ export const PASSWORD_REQUIREMENTS = [
 ];
 
 export const PASSWORD_PATTERN =
-  /^(?=\S+$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,64}$/;
+  /^(?=\S+$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,64}$/u;
 
 export const PASSWORD_ERROR_MESSAGE =
   "Password must be 8-64 characters, at most 72 UTF-8 bytes, and include uppercase, lowercase, number, and special character, with no spaces.";

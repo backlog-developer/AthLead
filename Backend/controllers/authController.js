@@ -30,8 +30,8 @@ export const LoginAuth = async (req, res) => {
   const normalizedEmail = normalizeEmail(email);
   try {
     const user = await User.findOne({ email: normalizedEmail }).select(
-  "+password",
-);
+      "+password",
+    );
     if (!user) {
       return res.json({
         success: false,
@@ -121,14 +121,29 @@ export const logout = (req, res) => {
 };
 
 export const editUser = async (req, res) => {
-  const { fullname, phone, address, DOB, password } = req.body;
+  const { fullname, phone, address, DOB, password, currentPassword } = req.body;
 
   try {
-    if (password !== undefined && !isValidPassword(password)) {
-      return res.status(400).json({
-        success: false,
-        message: PASSWORD_ERROR_MESSAGE,
-      });
+    if (password !== undefined) {
+      const user = await User.findById(req.user._id).select("+password");
+
+      if (
+        typeof currentPassword !== "string" ||
+        !user ||
+        !compareSync(currentPassword, user.password)
+      ) {
+        return res.status(401).json({
+          success: false,
+          message: "Current password is required or incorrect",
+        });
+      }
+
+      if (!isValidPassword(password)) {
+        return res.status(400).json({
+          success: false,
+          message: PASSWORD_ERROR_MESSAGE,
+        });
+      }
     }
 
     let imageUrl;
